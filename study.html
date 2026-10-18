@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f4">
+  <title>Study Arcade — Learn by playing</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #17211b;
+      background: #f6f8f4;
+      font-synthesis: none;
+      --muted: #737e75;
+      --green: #18864b;
+      --line: #e6ebe4;
+      --card: #fff;
+    }
+
+    * { box-sizing: border-box; }
+    body { min-width: 320px; min-height: 100vh; margin: 0; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+
+    .shell { width: min(1120px, calc(100% - 44px)); margin: 0 auto; }
+    .topbar { height: 74px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: -.04em; }
+    .brand-icon { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 12px; color: #fff; background: #183e2a; }
+    .back-link { color: #4c5a4f; font-size: 13px; font-weight: 750; text-decoration: none; }
+    .back-link:hover { color: var(--green); }
+
+    .hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding: 38px 0 26px; }
+    .eyebrow { color: var(--green); font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 8px 0 8px; font-size: clamp(32px, 6vw, 48px); line-height: 1; letter-spacing: -.07em; }
+    .hero p { margin: 0; color: var(--muted); font-size: 14px; }
+    .streak { min-width: 106px; padding: 12px 15px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); text-align: center; }
+    .streak strong { display: block; font-size: 20px; }
+    .streak span { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+
+    .layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(275px, .8fr); gap: 18px; padding-bottom: 50px; }
+    .main-column, .side-column { display: grid; align-content: start; gap: 18px; }
+    .card { border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: 0 5px 16px rgba(20, 44, 25, .025); }
+    .quiz { padding: 21px; }
+    .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .card h2 { margin: 0; font-size: 17px; letter-spacing: -.04em; }
+    .sub { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .badge { padding: 6px 9px; border-radius: 999px; color: #21663d; background: #e9f7ed; font-size: 10px; font-weight: 850; white-space: nowrap; }
+    .quiz-tools { display: flex; align-items: center; gap: 8px; margin: 18px 0 14px; }
+    select { padding: 9px 30px 9px 11px; border: 1px solid var(--line); border-radius: 10px; color: #334137; background: white; font-size: 12px; }
+    .question-count { margin-left: auto; color: var(--muted); font-size: 11px; font-weight: 750; }
+    .question { min-height: 50px; margin: 0 0 14px; font-size: 20px; font-weight: 850; letter-spacing: -.045em; }
+    .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .answer { min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; color: #35423a; background: #fff; text-align: left; cursor: pointer; transition: .15s ease; }
+    .answer:hover:not(:disabled) { border-color: #88cba0; background: #f6fcf7; }
+    .answer:disabled { cursor: default; }
+    .answer.correct { border-color: #70bd88; color: #176a37; background: #edfaef; }
+    .answer.wrong { border-color: #e8a39b; color: #963e34; background: #fff3f1; }
+    .quiz-footer { display: flex; align-items: center; justify-content: space-between; min-height: 37px; margin-top: 13px; }
+    .feedback { color: var(--muted); font-size: 12px; }
+    .primary, .secondary { min-height: 40px; padding: 0 14px; border: 0; border-radius: 11px; font-size: 12px; font-weight: 850; cursor: pointer; }
+    .primary { color: #fff; background: #19834a; }
+    .primary:hover { background: #12683a; }
+    .primary:disabled { opacity: .48; cursor: default; }
+    .secondary { border: 1px solid var(--line); color: #3a4b3e; background: white; }
+
+    .tutor { overflow: hidden; }
+    .tutor-head { padding: 19px 20px 15px; color: white; background: linear-gradient(115deg, #173b29, #24663c); }
+    .tutor-head .eyebrow { color: #a8e8b4; }
+    .tutor-head h2 { margin-top: 5px; font-size: 18px; }
+    .tutor-head p { margin: 5px 0 0; color: #d1e9d6; font-size: 12px; line-height: 1.45; }
+    .chat-log { display: flex; flex-direction: column; gap: 11px; height: 250px; overflow-y: auto; padding: 16px 17px; background: #fbfcfa; }
+    .message { max-width: 94%; padding: 10px 12px; border-radius: 13px; color: #465149; background: #eef2ec; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
+    .message.user { align-self: flex-end; color: white; background: #267347; }
+    .message a { color: inherit; font-weight: 800; }
+    .chat-form { display: flex; gap: 8px; padding: 11px; border-top: 1px solid var(--line); }
+    .chat-form input, .inline-form input { min-width: 0; flex: 1; height: 42px; padding: 0 12px; border: 1px solid var(--line); border-radius: 11px; outline: none; }
+    .chat-form input:focus, .inline-form input:focus { border-color: #78bf8e; box-shadow: 0 0 0 3px rgba(55, 146, 83, .11); }
+    .chat-form button { width: 44px; min-height: 42px; border: 0; border-radius: 11px; color: white; background: #19834a; font-size: 18px; cursor: pointer; }
+    .chat-form button:disabled { opacity: .5; cursor: wait; }
+
+    .recommendations { padding: 20px; }
+    .recommendations h2 { margin: 0; font-size: 16px; letter-spacing: -.03em; }
+    .game-list { display: grid; gap: 9px; margin-top: 14px; }
+    .game-card { display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 10px; padding: 11px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+    .game-icon { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 12px; background: #f0f6ed; font-size: 20px; }
+    .game-card strong { display: block; font-size: 12px; }
+    .game-card small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .game-card button { padding: 7px 9px; border: 1px solid #dce9de; border-radius: 9px; color: #287346; background: #f3faf4; font-size: 10px; font-weight: 850; cursor: pointer; }
+
+    .play-panel { min-height: 197px; padding: 18px; }
+    .play-panel .card-head { align-items: center; }
+    .play-area { margin-top: 14px; }
+    .flashcard { display: grid; width: 100%; min-height: 92px; place-items: center; padding: 16px; border: 1px solid #dfece1; border-radius: 15px; color: #1a5832; background: linear-gradient(140deg, #f0faef, #edf6ff); font-size: 17px; font-weight: 850; text-align: center; cursor: pointer; }
+    .flashcard small { display: block; margin-top: 7px; color: #7a897d; font-size: 10px; font-weight: 650; }
+    .inline-form { display: flex; gap: 8px; }
+    .inline-form input { height: 40px; }
+    .mini-status { min-height: 18px; margin-top: 8px; color: var(--muted); font-size: 11px; }
+    .scramble-word { margin: 6px 0 13px; color: #20804a; font-size: 25px; font-weight: 950; letter-spacing: .16em; text-align: center; }
+    .timer { color: #52705a; font-size: 11px; font-weight: 800; }
+    .math-problem { margin: 17px 0 12px; font-size: 29px; font-weight: 950; letter-spacing: -.06em; text-align: center; }
+    .math-score { color: var(--muted); font-size: 11px; font-weight: 750; text-align: center; }
+    .start-row { display: flex; justify-content: center; margin-top: 14px; }
+
+    .toast { position: fixed; right: 18px; bottom: 18px; z-index: 2; max-width: calc(100vw - 36px); padding: 12px 15px; border-radius: 12px; color: white; background: #193b29; box-shadow: 0 8px 30px #10261730; font-size: 12px; opacity: 0; transform: translateY(8px); transition: .2s ease; pointer-events: none; }
+    .toast.visible { opacity: 1; transform: translateY(0); }
+    footer { padding: 18px 0 26px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; text-align: center; }
+    footer a { color: #287346; font-weight: 800; text-decoration: none; }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 28px, 550px); }
+      .topbar { height: 62px; }
+      .hero { padding: 29px 0 20px; }
+      .layout { grid-template-columns: 1fr; gap: 14px; }
+      .main-column, .side-column { gap: 14px; }
+      .quiz { padding: 17px; }
+      .chat-log { height: 210px; }
+    }
+
+    @media (max-width: 420px) {
+      .hero { align-items: center; }
+      .hero p { max-width: 230px; line-height: 1.45; }
+      .streak { min-width: 82px; padding: 10px; }
+      .answers { grid-template-columns: 1fr; }
+      .question { font-size: 18px; }
+      .game-card { grid-template-columns: 38px 1fr auto; gap: 8px; padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar shell">
+    <a class="brand" href="study.html" aria-label="Study Arcade home"><span class="brand-icon">✳</span> Study Arcade</a>
+    <a class="back-link" href="index.html">← Back to OctoDash</a>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">A little play, a lot of progress</div>
+        <h1>Welcome to your<br>Study Arcade.</h1>
+        <p>Pick a quick challenge, learn something new, and keep your brain moving.</p>
+      </div>
+      <div class="streak"><strong id="best-streak">0</strong><span>Quiz best</span></div>
+    </section>
+
+    <div class="layout">
+      <div class="main-column">
+        <section class="card quiz" aria-labelledby="quiz-title">
+          <div class="card-head">
+            <div><h2 id="quiz-title">⚡ Quick quiz</h2><p class="sub">Five questions. One tiny brain boost.</p></div>
+            <span class="badge" id="quiz-score">Score 0 / 0</span>
+          </div>
+          <div class="quiz-tools">
+            <select id="subject" aria-label="Choose a quiz subject">
+              <option value="mixed">Mixed subjects</option><option value="science">Science</option>
+              <option value="math">Math</option><option value="history">History</option>
+              <option value="geography">Geography</option>
+            </select>
+            <span class="question-count" id="question-count">Question 1 of 5</span>
+          </div>
+          <p class="question" id="question"></p>
+          <div class="answers" id="answers"></div>
+          <div class="quiz-footer"><span class="feedback" id="quiz-feedback" aria-live="polite">Choose your answer.</span><button class="primary" id="next-question" type="button" disabled>Next →</button></div>
+        </section>
+
+        <section class="card play-panel" id="flashcard-panel">
+          <div class="card-head"><div><h2>🃏 Flip & learn</h2><p class="sub">A fast flashcard round.</p></div><span class="badge" id="flashcard-count">1 / 5</span></div>
+          <div class="play-area"><button class="flashcard" id="flashcard" type="button"><span id="flashcard-content"></span></button><div class="quiz-footer"><span class="feedback">Tap the card to flip it.</span><button class="secondary" id="next-card" type="button">Next card →</button></div></div>
+        </section>
+
+        <section class="card play-panel" id="math-panel">
+          <div class="card-head"><div><h2>🔢 Math sprint</h2><p class="sub">Solve as many as you can before time runs out.</p></div><span class="timer" id="math-timer">30 sec</span></div>
+          <div class="math-problem" id="math-problem">Ready?</div>
+          <div class="math-score" id="math-score">Score: 0</div>
+          <div class="start-row"><button class="primary" id="math-start" type="button">Start sprint</button></div>
+          <form class="inline-form" id="math-form" hidden><input id="math-answer" type="number" inputmode="numeric" autocomplete="off" aria-label="Your math answer" placeholder="Your answer"><button class="primary" type="submit">Answer</button></form>
+        </section>
+
+        <section class="card play-panel" id="word-panel">
+          <div class="card-head"><div><h2>🔤 Word scramble</h2><p class="sub">Unscramble a study word.</p></div><span class="badge" id="word-round">Round 1</span></div>
+          <div class="scramble-word" id="scramble-word"></div>
+          <form class="inline-form" id="word-form"><input id="word-answer" type="text" autocomplete="off" aria-label="Unscrambled word" placeholder="Type the word"><button class="primary" type="submit">Check</button></form>
+          <div class="mini-status" id="word-status" aria-live="polite">A new word every round.</div>
+        </section>
+      </div>
+
+      <aside class="side-column">
+        <section class="card tutor" aria-labelledby="tutor-title">
+          <div class="tutor-head">
+            <div class="eyebrow">Your study sidekick</div>
+            <h2 id="tutor-title">Ask or search anything</h2>
+            <p>Ask a question or search a topic. I’ll look it up and share a quick summary.</p>
+          </div>
+          <div class="chat-log" id="chat-log" aria-live="polite">
+            <div class="message">Hey! What are you curious about? Try “How do volcanoes work?” or search any topic.</div>
+          </div>
+          <form class="chat-form" id="chat-form">
+            <input id="chat-input" type="search" autocomplete="off" aria-label="Ask or search a study topic" placeholder="Ask or search a topic...">
+            <button type="submit" aria-label="Send question">↑</button>
+          </form>
+        </section>
+
+        <section class="card recommendations">
+          <h2>🎮 Pick your next game</h2>
+          <p class="sub">Little games for different kinds of brainpower.</p>
+          <div class="game-list">
+            <article class="game-card"><span class="game-icon">⚡</span><div><strong>Quick quiz</strong><small>Test what you know</small></div><button type="button" data-target="quiz-title">Play</button></article>
+            <article class="game-card"><span class="game-icon">🃏</span><div><strong>Flip & learn</strong><small>Build your memory</small></div><button type="button" data-target="flashcard-panel">Play</button></article>
+            <article class="game-card"><span class="game-icon">🔢</span><div><strong>Math sprint</strong><small>Race the clock</small></div><button type="button" data-target="math-panel">Play</button></article>
+            <article class="game-card"><span class="game-icon">🔤</span><div><strong>Word scramble</strong><small>Untangle new words</small></div><button type="button" data-target="word-panel">Play</button></article>
+            <article class="game-card"><span class="game-icon">🔎</span><div><strong>Study sidekick</strong><small>Explore a new topic</small></div><button type="button" data-target="tutor-title">Ask</button></article>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer><div class="shell">Keep exploring. <a href="index.html">Head back to Campus Chase ↗</a></div></footer>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    (() => {
+      const quizBank = {
+        science: [
+          { q: "Which planet is known as the Red Planet?", a: ["Venus", "Mars", "Jupiter", "Mercury"], correct: 1 },
+          { q: "What gas do plants absorb from the air?", a: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correct: 2 },
+          { q: "What is the center of an atom called?", a: ["Cell", "Nucleus", "Molecule", "Core"], correct: 1 },
+          { q: "Which force pulls objects toward Earth?", a: ["Friction", "Magnetism", "Gravity", "Pressure"], correct: 2 },
+          { q: "How many bones are in the typical adult human body?", a: ["106", "206", "306", "406"], correct: 1 },
+          { q: "What is the closest star to Earth?", a: ["Sirius", "The Sun", "Polaris", "Proxima Centauri"], correct: 1 }
+        ],
+        math: [
+          { q: "What is 12 × 8?", a: ["86", "94", "96", "108"], correct: 2 },
+          { q: "What is the square root of 144?", a: ["10", "11", "12", "14"], correct: 2 },
+          { q: "What is ¾ written as a percentage?", a: ["25%", "50%", "75%", "80%"], correct: 2 },
+          { q: "A triangle’s angles add up to…", a: ["90°", "180°", "270°", "360°"], correct: 1 },
+          { q: "What is 15% of 200?", a: ["15", "20", "30", "45"], correct: 2 },
+          { q: "What is the next prime number after 7?", a: ["9", "10", "11", "13"], correct: 2 }
+        ],
+        history: [
+          { q: "The Great Wall is in which country?", a: ["India", "China", "Japan", "Mongolia"], correct: 1 },
+          { q: "The Renaissance began in which country?", a: ["France", "Greece", "Italy", "Spain"], correct: 2 },
+          { q: "Who was the first person to walk on the Moon?", a: ["Yuri Gagarin", "Buzz Aldrin", "Neil Armstrong", "John Glenn"], correct: 2 },
+          { q: "The ancient Olympic Games began in…", a: ["Rome", "Egypt", "Greece", "Persia"], correct: 2 },
+          { q: "In which year did World War II end?", a: ["1939", "1942", "1945", "1950"], correct: 2 }
+        ],
+        geography: [
+          { q: "Which is the largest ocean on Earth?", a: ["Atlantic", "Indian", "Arctic", "Pacific"], correct: 3 },
+          { q: "What is the capital of Japan?", a: ["Kyoto", "Tokyo", "Osaka", "Seoul"], correct: 1 },
+          { q: "Which continent has the most countries?", a: ["Asia", "Europe", "Africa", "South America"], correct: 2 },
+          { q: "Mount Everest is part of which mountain range?", a: ["Andes", "Alps", "Rockies", "Himalayas"], correct: 3 },
+          { q: "Which river flows through Egypt?", a: ["Amazon", "Nile", "Danube", "Yangtze"], correct: 1 }
+        ]
+      };
+      const questions = Object.values(quizBank).flat();
+      const cards = [
+        ["Photosynthesis", "The process plants use to turn sunlight, water, and carbon dioxide into food."],
+        ["Gravity", "The force that attracts objects with mass toward one another."],
+        ["Fraction", "A way to represent part of a whole, written as a numerator over a denominator."],
+        ["Ecosystem", "A community of living things interacting with each other and their environment."],
+        ["Democracy", "A system of government in which people have a say in decisions, often by voting."]
+      ];
+      const words = [
+        ["planet", "A large object that orbits a star."], ["fraction", "A part of a whole."],
+        ["habitat", "The natural home of an organism."], ["equation", "A mathematical statement that two expressions are equal."],
+        ["culture", "The shared ideas, customs, and arts of a group."]
+      ];
+      const $ = id => document.getElementById(id);
+      let bestScore = 0;
+      try {
+        const storedBest = Number(localStorage.getItem("study-arcade-best") || 0);
+        bestScore = Number.isFinite(storedBest) ? storedBest : 0;
+      } catch (error) {
+        console.warn("Could not load the Study Arcade record.", error);
+      }
+      $("best-streak").textContent = bestScore;
+
+      let round = [];
+      let questionIndex = 0;
+      let score = 0;
+      let answered = false;
+      let cardIndex = 0;
+      let cardFlipped = false;
+      let wordRound = 0;
+      let currentWord = words[0];
+      let mathInterval = null;
+      let mathSeconds = 30;
+      let mathScore = 0;
+      let toastTimeout = null;
+
+      function shuffle(items) {
+        const result = items.slice();
+        for (let i = result.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [result[i], result[j]] = [result[j], result[i]];
+        }
+        return result;
+      }
+
+      function startQuiz() {
+        const selected = $("subject").value;
+        round = shuffle(selected === "mixed" ? questions : quizBank[selected]).slice(0, 5);
+        questionIndex = 0;
+        score = 0;
+        answered = false;
+        $("quiz-score").textContent = "Score 0 / 0";
+        $("quiz-feedback").textContent = "Choose your answer.";
+        renderQuestion();
+      }
+
+      function renderQuestion() {
+        const item = round[questionIndex];
+        if (!item) return;
+        $("question").textContent = item.q;
+        $("question-count").textContent = "Question " + (questionIndex + 1) + " of " + round.length;
+        $("answers").replaceChildren();
+        $("next-question").disabled = true;
+        $("next-question").textContent = questionIndex === round.length - 1 ? "Finish round" : "Next →";
+        item.a.forEach((answer, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "answer";
+          button.textContent = answer;
+          button.addEventListener("click", () => chooseAnswer(index));
+          $("answers").append(button);
+        });
+      }
+
+      function chooseAnswer(choice) {
+        if (answered) return;
+        answered = true;
+        const item = round[questionIndex];
+        const buttons = [...$("answers").children];
+        buttons.forEach((button, index) => {
+          button.disabled = true;
+          if (index === item.correct) button.classList.add("correct");
+          else if (index === choice) button.classList.add("wrong");
+        });
+        const isCorrect = choice === item.correct;
+        if (isCorrect) score++;
+        $("quiz-score").textContent = "Score " + score + " / " + (questionIndex + 1);
+        $("quiz-feedback").textContent = isCorrect ? "That's right! Nice work." : "Not quite — " + item.a[item.correct] + " is the answer.";
+        $("next-question").disabled = false;
+      }
+
+      function nextQuestion() {
+        if (questionIndex >= round.length) {
+          startQuiz();
+          return;
+        }
+        if (!answered) return;
+        questionIndex++;
+        if (questionIndex >= round.length) {
+          $("question").textContent = "Round complete — you scored " + score + " out of " + round.length + "!";
+          $("answers").replaceChildren();
+          $("question-count").textContent = "Finished";
+          $("quiz-feedback").textContent = score === round.length ? "Perfect round! Play again to beat your best." : "A little practice goes a long way.";
+          $("next-question").textContent = "Play again";
+          $("next-question").disabled = false;
+          if (score > bestScore) {
+            bestScore = score;
+            $("best-streak").textContent = bestScore;
+            try {
+              localStorage.setItem("study-arcade-best", String(bestScore));
+            } catch (error) {
+              console.warn("Could not save the Study Arcade record.", error);
+            }
+          }
+          return;
+        }
+        answered = false;
+        $("quiz-feedback").textContent = "Choose your answer.";
+        renderQuestion();
+      }
+
+      $("next-question").addEventListener("click", nextQuestion);
+      $("subject").addEventListener("change", startQuiz);
+      startQuiz();
+
+      function renderCard() {
+        const card = cards[cardIndex];
+        $("flashcard-count").textContent = (cardIndex + 1) + " / " + cards.length;
+        $("flashcard-content").replaceChildren();
+        const term = document.createElement("span");
+        term.textContent = cardFlipped ? card[1] : card[0];
+        $("flashcard-content").append(term);
+        const note = document.createElement("small");
+        note.textContent = cardFlipped ? "Tap to see the word" : "Tap to reveal the meaning";
+        $("flashcard-content").append(note);
+      }
+      $("flashcard").addEventListener("click", () => { cardFlipped = !cardFlipped; renderCard(); });
+      $("next-card").addEventListener("click", () => { cardIndex = (cardIndex + 1) % cards.length; cardFlipped = false; renderCard(); });
+      renderCard();
+
+      function newWord() {
+        currentWord = words[wordRound % words.length];
+        const letters = currentWord[0].split("");
+        let scrambled = currentWord[0];
+        for (let attempt = 0; attempt < 8 && scrambled === currentWord[0]; attempt++) scrambled = shuffle(letters).join("");
+        $("scramble-word").textContent = scrambled.toUpperCase();
+        $("word-round").textContent = "Round " + (wordRound + 1);
+        $("word-status").textContent = "Hint: " + currentWord[1];
+        $("word-answer").value = "";
+      }
+      $("word-form").addEventListener("submit", event => {
+        event.preventDefault();
+        const answer = $("word-answer").value.trim().toLowerCase();
+        if (!answer) return;
+        if (answer === currentWord[0]) {
+          $("word-status").textContent = "Correct! " + currentWord[1];
+          $("word-status").style.color = "#18864b";
+          wordRound++;
+          window.setTimeout(newWord, 900);
+        } else {
+          $("word-status").textContent = "Not quite — give it another try!";
+          $("word-status").style.color = "#a14a40";
+        }
+      });
+      newWord();
+
+      function makeMathProblem() {
+        const operators = ["+", "−", "×"];
+        const operator = operators[Math.floor(Math.random() * operators.length)];
+        let a = Math.floor(Math.random() * 12) + 1;
+        let b = Math.floor(Math.random() * 12) + 1;
+        if (operator === "−" && b > a) [a, b] = [b, a];
+        $("math-problem").textContent = a + " " + operator + " " + b;
+        return operator === "+" ? a + b : operator === "−" ? a - b : a * b;
+      }
+      let mathAnswer = null;
+      function endMathSprint() {
+        window.clearInterval(mathInterval);
+        mathInterval = null;
+        $("math-form").hidden = true;
+        $("math-start").hidden = false;
+        $("math-start").textContent = "Play again";
+        $("math-problem").textContent = "Time's up!";
+        $("math-score").textContent = "You solved " + mathScore + (mathScore === 1 ? " problem." : " problems.");
+      }
+      $("math-start").addEventListener("click", () => {
+        window.clearInterval(mathInterval);
+        mathSeconds = 30;
+        mathScore = 0;
+        mathAnswer = makeMathProblem();
+        $("math-timer").textContent = "30 sec";
+        $("math-score").textContent = "Score: 0";
+        $("math-start").hidden = true;
+        $("math-form").hidden = false;
+        $("math-answer").value = "";
+        $("math-answer").focus();
+        mathInterval = window.setInterval(() => {
+          mathSeconds--;
+          $("math-timer").textContent = mathSeconds + " sec";
+          if (mathSeconds <= 0) endMathSprint();
+        }, 1000);
+      });
+      $("math-form").addEventListener("submit", event => {
+        event.preventDefault();
+        if ($("math-answer").value === "") return;
+        if (Number($("math-answer").value) === mathAnswer) {
+          mathScore++;
+          $("math-score").textContent = "Score: " + mathScore;
+        }
+        mathAnswer = makeMathProblem();
+        $("math-answer").value = "";
+        $("math-answer").focus();
+      });
+
+      function addMessage(text, kind, link) {
+        const bubble = document.createElement("div");
+        bubble.className = "message" + (kind === "user" ? " user" : "");
+        bubble.textContent = text;
+        if (link) {
+          bubble.append(document.createTextNode(" "));
+          const anchor = document.createElement("a");
+          anchor.href = link;
+          anchor.target = "_blank";
+          anchor.rel = "noopener noreferrer";
+          anchor.textContent = "Read more ↗";
+          bubble.append(anchor);
+        }
+        $("chat-log").append(bubble);
+        $("chat-log").scrollTop = $("chat-log").scrollHeight;
+      }
+
+      async function searchTopic(query) {
+        const endpoint = new URL("https://en.wikipedia.org/w/api.php");
+        endpoint.search = new URLSearchParams({ action: "query", list: "search", srsearch: query, srlimit: "1", format: "json", origin: "*" }).toString();
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error("Search service returned HTTP " + response.status);
+        const results = await response.json();
+        const result = results.query && results.query.search && results.query.search[0];
+        if (!result) {
+          addMessage("I couldn't find a match for that search. Try a different keyword or phrase.");
+          return;
+        }
+        const summaryEndpoint = "https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(result.title.replace(/ /g, "_"));
+        const summaryResponse = await fetch(summaryEndpoint);
+        if (!summaryResponse.ok) throw new Error("Topic summary returned HTTP " + summaryResponse.status);
+        const page = await summaryResponse.json();
+        let summary = page.extract || result.snippet.replace(/<[^>]*>/g, "");
+        if (summary.length > 520) {
+          summary = summary.slice(0, 520);
+          summary = summary.slice(0, summary.lastIndexOf(" ")) + "…";
+        }
+        addMessage(summary + " — Source: Wikipedia.", "bot", page.content_urls && page.content_urls.desktop && page.content_urls.desktop.page);
+      }
+
+      $("chat-form").addEventListener("submit", async event => {
+        event.preventDefault();
+        const input = $("chat-input");
+        const query = input.value.trim();
+        if (!query) return;
+        addMessage(query, "user");
+        input.value = "";
+        const button = $("chat-form").querySelector("button");
+        button.disabled = true;
+        const loading = document.createElement("div");
+        loading.className = "message";
+        loading.textContent = "Searching for a helpful explanation…";
+        $("chat-log").append(loading);
+        $("chat-log").scrollTop = $("chat-log").scrollHeight;
+        try {
+          await searchTopic(query);
+        } catch (error) {
+          console.error("Study topic search failed.", error);
+          addMessage("I couldn't reach the study search right now. Check your connection and try again.");
+        } finally {
+          loading.remove();
+          button.disabled = false;
+          input.focus();
+        }
+      });
+
+      function showToast(text) {
+        const toast = $("toast");
+        toast.textContent = text;
+        toast.classList.add("visible");
+        window.clearTimeout(toastTimeout);
+        toastTimeout = window.setTimeout(() => toast.classList.remove("visible"), 1900);
+      }
+      document.querySelectorAll("[data-target]").forEach(button => {
+        button.addEventListener("click", () => {
+          const target = $(button.dataset.target);
+          if (!target) return;
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+          if (button.dataset.target === "tutor-title") $("chat-input").focus({ preventScroll: true });
+          else if (button.dataset.target === "math-panel") showToast("Ready when you are — start your math sprint!");
+          else if (button.dataset.target === "quiz-title") $("subject").focus({ preventScroll: true });
+          else if (button.dataset.target === "flashcard-panel") $("flashcard").focus({ preventScroll: true });
+          else if (button.dataset.target === "word-panel") $("word-answer").focus({ preventScroll: true });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7fb">
+  <meta name="description" content="HERSPACE is your personal demo dashboard for women's safety, wellbeing, growth, money, confidence, and lifestyle.">
+  <title>HERSPACE — Your life, your space</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="HERSPACE dashboard">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>HER<span class="brand-light">SPACE</span><small>YOUR LIFE, YOUR SPACE</small></span>
+      </a>
+
+      <div class="nav-label">YOUR SPACE</div>
+      <nav class="primary-nav" aria-label="Your space">
+        <button class="nav-item is-active" type="button" data-section="home" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span>Overview</button>
+        <button class="nav-item" type="button" data-section="safety"><span class="nav-icon" aria-hidden="true">♡</span>Her Safety<span class="nav-dot lavender"></span></button>
+        <button class="nav-item" type="button" data-section="wellness"><span class="nav-icon" aria-hidden="true">✿</span>Her Wellness<span class="nav-dot peach"></span></button>
+        <button class="nav-item" type="button" data-section="growth"><span class="nav-icon" aria-hidden="true">↗</span>Her Growth<span class="nav-dot blue"></span></button>
+        <button class="nav-item" type="button" data-section="money"><span class="nav-icon" aria-hidden="true">＄</span>Her Money<span class="nav-dot yellow"></span></button>
+        <button class="nav-item" type="button" data-section="confidence"><span class="nav-icon" aria-hidden="true">✧</span>Her Confidence<span class="nav-dot pink"></span></button>
+        <button class="nav-item" type="button" data-section="lifestyle"><span class="nav-icon" aria-hidden="true">☼</span>Her Lifestyle<span class="nav-dot green"></span></button>
+        <button class="nav-item" type="button" data-section="settings"><span class="nav-icon" aria-hidden="true">⚙</span>Settings</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="journey-card">
+          <div class="journey-icon" aria-hidden="true">✦</div>
+          <strong>Your journey, your pace.</strong>
+          <p>Small steps count. Come back whenever you need a little space for you.</p>
+        </div>
+        <span class="sidebar-foot">A DEMO SPACE MADE WITH CARE</span>
+      </div>
+    </aside>
+
+    <div class="mobile-scrim" id="mobile-scrim" hidden></div>
+
+    <main class="main-area" id="main-content" tabindex="-1">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
+        <div class="breadcrumb"><span>YOUR SPACE</span><span class="crumb-divider">/</span><strong id="current-location">Overview</strong></div>
+        <form class="global-search" id="search-form" role="search">
+          <label class="visually-hidden" for="app-search">Search HERSPACE</label>
+          <button class="search-icon" id="search-toggle" type="button" aria-label="Open search" aria-expanded="false" aria-controls="app-search">⌕</button>
+          <input id="app-search" type="search" autocomplete="off" placeholder="Search your space" aria-controls="search-results">
+          <button class="search-shortcut" id="search-shortcut" type="button" aria-label="Focus search">Ctrl K</button>
+          <div class="search-results" id="search-results" role="region" aria-label="Search results" hidden></div>
+          <span class="visually-hidden" id="search-status" role="status" aria-live="polite"></span>
+        </form>
+        <div class="topbar-actions">
+          <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme">☾</button>
+          <span class="today-label" id="today-label"></span>
+          <div class="profile-wrap">
+            <button class="profile-button" id="profile-toggle" type="button" aria-expanded="false" aria-controls="profile-panel">
+              <span class="avatar" id="avatar" aria-hidden="true">A</span>
+              <span class="profile-copy"><strong id="profile-name-display">Alex Morgan</strong><small>YOUR PROFILE</small></span>
+              <span class="chevron" aria-hidden="true">⌄</span>
+            </button>
+            <section class="profile-panel" id="profile-panel" aria-labelledby="profile-heading" hidden>
+              <h2 id="profile-heading">Your preferences</h2>
+              <p class="panel-note">Personalize this demo on your device.</p>
+              <label for="preferred-name">What should we call you?</label>
+              <input id="preferred-name" type="text" maxlength="32" autocomplete="name" placeholder="Your name">
+              <label for="life-stage">Life stage</label>
+              <select id="life-stage">
+                <option value="">Choose if you like</option>
+                <option>Student</option><option>Starting my career</option><option>Building a career</option><option>Caregiving</option><option>Exploring a new chapter</option><option>Prefer not to say</option>
+              </select>
+              <label for="focus-area">My focus right now</label>
+              <select id="focus-area">
+                <option value="">Choose a focus</option>
+                <option>Feeling safer</option><option>Rest and wellbeing</option><option>Learning something new</option><option>Feeling good about money</option><option>Growing my confidence</option><option>Making space for joy</option>
+              </select>
+              <button class="button button-primary save-preferences" id="save-preferences" type="button">Save preferences</button>
+              <p class="panel-note privacy-note">Demo only: name and life stage stay in this browser; your focus choice stays only for this session.</p>
+            </section>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <div class="storage-warning" id="storage-warning" role="status" hidden>Browser storage is unavailable. Changes marked as saved cannot persist after you close or refresh this page.</div>
+        <section class="view is-visible" id="view-home" data-view="home" aria-labelledby="welcome-heading" tabindex="-1">
+          <div class="welcome-row">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-star" aria-hidden="true">✦</span> YOUR PERSONAL DASHBOARD</div>
+              <h1 id="welcome-heading">Good morning, <span id="welcome-name">Alex</span><span class="wave" aria-hidden="true">✿</span></h1>
+              <p class="welcome-copy">This is your space to check in, find support, and move forward at your own pace.</p>
+            </div>
+            <div class="date-card"><span class="date-icon" aria-hidden="true">☼</span><span><strong>A fresh day</strong><small>One step at a time</small></span></div>
+          </div>
+
+          <section class="affirmation-banner" aria-label="Daily reminder">
+            <div class="banner-decoration" aria-hidden="true">✳</div>
+            <div><span class="banner-label">A LITTLE REMINDER</span><p>You don't have to have it all figured out to take your next step.</p></div>
+            <span class="banner-sparkle" aria-hidden="true">✧</span>
+          </section>
+
+          <section class="section-block" aria-labelledby="quick-title">
+            <div class="section-heading"><div><span class="eyebrow">START WHERE YOU ARE</span><h2 id="quick-title">Your quick actions</h2></div><span class="soft-note">A few helpful places to begin</span></div>
+            <div class="quick-grid" id="dashboard-shortcuts"></div>
+          </section>
+
+          <section class="section-block progress-block" aria-labelledby="progress-title">
+            <div class="section-heading"><div><span class="eyebrow">LOOK AT YOU GO</span><h2 id="progress-title">Your progress</h2></div><span class="soft-note">A snapshot, just for you</span></div>
+            <div class="progress-grid">
+              <article class="progress-card"><span class="progress-icon icon-lavender" aria-hidden="true">✿</span><span class="progress-info"><small>WELLNESS CHECK-INS</small><strong><span id="checkin-count">0</span> <span class="progress-unit">this session</span></strong><span class="progress-note">Mood check-ins are not stored.</span></span><span class="progress-decoration" aria-hidden="true">✧</span></article>
+              <article class="progress-card"><span class="progress-icon icon-blue" aria-hidden="true">↗</span><span class="progress-info"><small>GROWTH GOALS</small><strong><span id="goal-count">0 / 4</span> <span class="progress-unit">complete</span></strong><span class="progress-meter" id="goal-meter" role="progressbar" aria-label="Growth goals complete" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"><span></span></span></span><span class="progress-decoration" aria-hidden="true">✧</span></article>
+              <article class="progress-card"><span class="progress-icon icon-peach" aria-hidden="true">♡</span><span class="progress-info"><small>DAILY CONFIDENCE CHALLENGE</small><strong><span id="confidence-count">Not yet</span> <span class="progress-unit">today</span></strong><span class="progress-meter" id="confidence-meter" role="progressbar" aria-label="Today's confidence challenge" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><span></span></span></span><span class="progress-decoration" aria-hidden="true">✧</span></article>
+              <article class="progress-card"><span class="progress-icon icon-yellow" aria-hidden="true">＄</span><span class="progress-info"><small>MONTHLY SPENDING</small><strong><span id="spending-count">$0</span> <span class="progress-unit">tracked</span></strong><span class="progress-meter" id="spending-meter-wrap" role="progressbar" aria-label="Monthly spending against your optional limit" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><span id="spending-meter"></span></span><span class="progress-note" id="spending-meter-status">Set a spending limit to track progress.</span></span><span class="progress-decoration" aria-hidden="true">✧</span></article>
+            </div>
+          </section>
+
+          <section class="section-block explore-block" aria-labelledby="explore-title">
+            <div class="section-heading"><div><span class="eyebrow">MADE FOR ALL YOUR CHAPTERS</span><h2 id="explore-title">Explore your space</h2></div></div>
+            <div class="explore-grid">
+              <button class="explore-card" type="button" data-open-section="safety"><span class="explore-symbol symbol-lavender">♡</span><strong>Her Safety</strong><span>Feel prepared and supported.</span><b aria-hidden="true">↗</b></button>
+              <button class="explore-card" type="button" data-open-section="wellness"><span class="explore-symbol symbol-peach">✿</span><strong>Her Wellness</strong><span>Care for your whole self.</span><b aria-hidden="true">↗</b></button>
+              <button class="explore-card" type="button" data-open-section="growth"><span class="explore-symbol symbol-blue">↗</span><strong>Her Growth</strong><span>Make room for what's next.</span><b aria-hidden="true">↗</b></button>
+              <button class="explore-card" type="button" data-open-section="money"><span class="explore-symbol symbol-yellow">＄</span><strong>Her Money</strong><span>Build confidence with money.</span><b aria-hidden="true">↗</b></button>
+              <button class="explore-card" type="button" data-open-section="confidence"><span class="explore-symbol symbol-pink">✧</span><strong>Her Confidence</strong><span>Celebrate the person you are.</span><b aria-hidden="true">↗</b></button>
+              <button class="explore-card" type="button" data-open-section="lifestyle"><span class="explore-symbol symbol-green">☼</span><strong>Her Lifestyle</strong><span>Find little moments of joy.</span><b aria-hidden="true">↗</b></button>
+            </div>
+          </section>
+          <p class="demo-disclaimer">HERSPACE is a demo experience. It does not provide emergency, medical, legal, or financial services.</p>
+        </section>
+
+        <section class="view" id="view-safety" data-view="safety" aria-labelledby="safety-heading" tabindex="-1" hidden>
+          <div class="page-intro"><span class="eyebrow">HER SAFETY · YOUR CHOICES MATTER</span><h1 id="safety-heading">Feel more prepared.</h1><p>Explore thoughtful ways to plan ahead, protect your privacy, and find support you trust. Choose what feels useful; skip anything that doesn't.</p></div>
+          <div class="feature-grid safety-grid">
+            <article class="panel-card feature-card">
+              <div class="feature-top"><span class="large-icon icon-lavender">♡</span><span class="demo-tag">PRIVATE TO THIS DEMO</span></div>
+              <h2>Your personal safety plan</h2><p class="muted">A few ideas to consider in your own time. Safety checklist selections stay only for this open session.</p>
+              <div class="check-list">
+                <label class="check-row"><input type="checkbox" data-session-check="safety"><span><strong>Choose a trusted person</strong><small>Someone you feel comfortable reaching out to.</small></span></label>
+                <label class="check-row"><input type="checkbox" data-session-check="safety"><span><strong>Pick a check-in phrase</strong><small>A simple message that lets someone know you need support.</small></span></label>
+                <label class="check-row"><input type="checkbox" data-session-check="safety"><span><strong>Know a place you can go</strong><small>Think of a location where you feel comfortable and safe.</small></span></label>
+                <label class="check-row"><input type="checkbox" data-session-check="safety"><span><strong>Review your privacy settings</strong><small>Check location sharing and account visibility when convenient.</small></span></label>
+              </div><div class="inline-feedback" id="safety-feedback" aria-live="polite">Your checklist is optional and stays only in this open session.</div>
+            </article>
+            <article class="panel-card feature-card"><span class="eyebrow">A PERSONAL JOURNEY TIMER</span><h2>Check in on your own terms</h2><p class="muted">This timer runs only on this page. It does not track your location, send updates, or contact anyone.</p><label class="field-label" for="journey-duration">Timer length</label><select class="text-field" id="journey-duration"><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option></select><div class="journey-timer-display" id="journey-timer-display" aria-live="polite">Not started</div><button class="button button-primary" id="journey-start" type="button">Start demo timer</button><button class="button button-secondary" id="journey-stop" type="button" disabled>Stop timer</button><div class="inline-feedback" id="journey-feedback">Stay on this page to see the demo timer.</div></article>
+            <article class="panel-card feature-card sos-card"><span class="eyebrow">DEMO INTERACTION ONLY</span><h2>Simulated SOS</h2><p class="muted">This button does not make a call, send a message, share your location, or alert anyone. It is not emergency support.</p><button class="button button-secondary" id="sos-simulate" type="button">Start SOS simulation</button><button class="button button-secondary" id="sos-cancel" type="button" hidden>Cancel simulation</button><div class="inline-feedback" id="sos-feedback" aria-live="polite">No alert is sent by this demo.</div></article>
+            <article class="panel-card info-card tinted-lavender">
+              <span class="large-icon icon-white">✦</span><span class="eyebrow">A MOMENT TO PAUSE</span><h2>Your comfort comes first.</h2><p>You get to decide what support looks like. You don't have to complete this list or share your plans with anyone.</p>
+              <button class="button button-secondary" type="button" data-open-section="confidence">Visit your confidence space ↗</button>
+            </article>
+            <article class="panel-card feature-card">
+              <span class="eyebrow">DIGITAL WELLBEING</span><h2>A small privacy check</h2><p class="muted">A few gentle reminders for looking after your digital space.</p>
+              <ul class="simple-list"><li>Use a passphrase that's hard to guess and easy for you to remember.</li><li>Review which apps can access your location.</li><li>Sign out of shared devices when you're done.</li></ul>
+              <span class="demo-disclaimer">General information only, not a safety assessment or urgent support service.</span>
+            </article>
+            <article class="panel-card info-card tinted-peach"><span class="large-icon icon-white">☁</span><span class="eyebrow">TAKE IT GENTLY</span><h2>One thought at a time.</h2><p>If thinking about safety feels overwhelming, it's okay to close this page and come back another time.</p></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-wellness" data-view="wellness" aria-labelledby="wellness-heading" tabindex="-1" hidden>
+          <div class="page-intro"><span class="eyebrow">HER WELLNESS · CARE WITHOUT PRESSURE</span><h1 id="wellness-heading">How are you, really?</h1><p>Your wellbeing isn't a checklist. Use this gentle check-in to notice what you need today—not to judge how you're doing.</p></div>
+          <div class="feature-grid">
+            <article class="panel-card feature-card">
+              <span class="eyebrow">YOUR DAILY CHECK-IN</span><h2>What feels closest right now?</h2><p class="muted">Choose any word that fits. You can change it whenever you like.</p>
+              <div class="mood-options" role="group" aria-label="Choose a feeling"><button class="mood-option" type="button" data-mood="Calm">☁<span>Calm</span></button><button class="mood-option" type="button" data-mood="Hopeful">✧<span>Hopeful</span></button><button class="mood-option" type="button" data-mood="Tired">☾<span>Tired</span></button><button class="mood-option" type="button" data-mood="A little unsure">♡<span>Unsure</span></button><button class="mood-option" type="button" data-mood="Something else">✿<span>Other</span></button></div>
+              <div class="inline-feedback" id="mood-feedback" aria-live="polite">There is no right answer, and you can skip this.</div>
+              <button class="button button-primary" id="save-checkin" type="button">Save today's check-in</button>
+            </article>
+            <article class="panel-card info-card tinted-lavender"><span class="large-icon icon-white">☼</span><span class="eyebrow">A ONE-MINUTE RESET</span><h2>A breath, just for you.</h2><p>Settle in if it feels comfortable. Inhale softly, then let your breath leave at its own pace. There is no need to change anything.</p><button class="button button-secondary" id="breathing-button" type="button">Start a gentle pause</button><div class="breathing-status" id="breathing-status" aria-live="polite"></div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">LITTLE THINGS CAN HELP</span><h2>Pick one kind thing for yourself</h2><div class="check-list"><label class="check-row"><input type="checkbox" data-session-check="wellness"><span><strong>Drink a glass of water</strong><small>A gentle nudge, not a rule.</small></span></label><label class="check-row"><input type="checkbox" data-session-check="wellness"><span><strong>Step outside or stretch</strong><small>Even a small change of scene counts.</small></span></label><label class="check-row"><input type="checkbox" data-session-check="wellness"><span><strong>Send someone a kind message</strong><small>Connection can start with one hello.</small></span></label><label class="check-row"><input type="checkbox" data-session-check="wellness"><span><strong>Rest without earning it</strong><small>You deserve a pause because you're human.</small></span></label></div><div class="inline-feedback" id="wellness-feedback" aria-live="polite">Selections stay only for this open session.</div></article>
+            <article class="panel-card info-card tinted-peach"><span class="large-icon icon-white">✿</span><span class="eyebrow">A KIND REMINDER</span><h2>You are allowed to begin again.</h2><p>Wellbeing can look different every day. Finding support from someone you trust is a strong next step when you need it.</p></article>
+            <article class="panel-card feature-card"><span class="eyebrow">A PRIVATE MOOD JOURNAL</span><h2>Anything you'd like to note?</h2><p class="muted">This optional reflection stays in memory only until you close or refresh this page.</p><label class="field-label" for="mood-journal">Your note</label><textarea class="text-field text-area" id="mood-journal" maxlength="500" placeholder="Write only what feels comfortable..."></textarea><button class="button button-primary" id="save-mood-journal" type="button">Keep this note for this session</button><button class="button button-secondary" id="clear-mood-journal" type="button" disabled>Clear session notes</button><div class="inline-feedback" id="mood-journal-feedback" aria-live="polite">Nothing is saved to browser storage.</div><div class="session-entry-list" id="mood-journal-list"><p class="muted">No notes in this session.</p></div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">OPTIONAL BODY CHECK-IN</span><h2>Cycle & symptom notes</h2><p class="muted">Optional and private to this page session. This is not medical tracking or advice.</p><label class="field-label" for="cycle-note">Cycle note (optional)</label><input class="text-field" id="cycle-note" maxlength="80" placeholder="For example, day 1 or prefer not to say"><label class="field-label" for="symptom-note">Symptom note (optional)</label><select class="text-field" id="symptom-note"><option value="">Skip symptom note</option><option>Low energy</option><option>Feeling comfortable</option><option>Cramping</option><option>Headache</option><option>Mood changes</option><option>Other / prefer not to say</option></select><button class="button button-primary" id="save-cycle-note" type="button">Add session-only note</button><button class="button button-secondary" id="clear-cycle-notes" type="button" disabled>Clear body notes</button><div class="inline-feedback" id="cycle-feedback" aria-live="polite">Not stored after you close or refresh this page.</div><div class="session-entry-list" id="cycle-note-list"><p class="muted">No body notes in this session.</p></div></article>
+            <article class="panel-card feature-card hydration-card"><span class="eyebrow">GENTLE HYDRATION REMINDER</span><h2>A sip when it suits you</h2><p class="muted">A casual water counter—not a health target. Your count resets when this page is refreshed.</p><div class="hydration-count"><strong id="water-count">0</strong><span>glasses noted this session</span></div><button class="button button-primary" id="water-add" type="button">＋ Add a glass</button><button class="button button-secondary" id="water-remove" type="button" disabled>− Undo</button><div class="inline-feedback" id="water-feedback" aria-live="polite">No daily goal or reminders.</div></article>
+          </div>
+          <p class="demo-disclaimer">This check-in is for reflection only and is not a medical or mental health service.</p>
+        </section>
+
+        <section class="view" id="view-growth" data-view="growth" aria-labelledby="growth-heading" tabindex="-1" hidden>
+          <div class="page-intro"><span class="eyebrow">HER GROWTH · YOUR NEXT CHAPTER</span><h1 id="growth-heading">Make room for what's next.</h1><p>Curiosity is a lovely place to start. Pick a tiny step toward something you'd like to learn, try, or make possible.</p></div>
+          <div class="feature-grid">
+            <article class="panel-card feature-card"><span class="eyebrow">BUILD A SKILL, YOUR WAY</span><h2>Ideas for your learning path</h2><div class="path-list"><label class="path-row"><input type="checkbox" data-progress="growth"><span class="path-number">01</span><span><strong>Explore digital confidence</strong><small>Learn the tools that make everyday tasks easier.</small></span><span class="path-arrow">↗</span></label><label class="path-row"><input type="checkbox" data-progress="growth"><span class="path-number">02</span><span><strong>Practice a new language</strong><small>Start with five useful words or phrases.</small></span><span class="path-arrow">↗</span></label><label class="path-row"><input type="checkbox" data-progress="growth"><span class="path-number">03</span><span><strong>Try creative problem-solving</strong><small>Make, sketch, build, or experiment.</small></span><span class="path-arrow">↗</span></label><label class="path-row"><input type="checkbox" data-progress="growth"><span class="path-number">04</span><span><strong>Learn to advocate for an idea</strong><small>Practice saying what matters to you.</small></span><span class="path-arrow">↗</span></label></div><div class="inline-feedback" id="growth-feedback" aria-live="polite">Choose any small step to mark it as yours.</div></article>
+            <article class="panel-card info-card tinted-blue"><span class="large-icon icon-white">↗</span><span class="eyebrow">YOUR STRENGTHS TRAVEL WITH YOU</span><h2>You already bring a lot.</h2><p>What you know, where you've been, and how you care are all part of what you bring to a new opportunity.</p></article>
+            <article class="panel-card feature-card"><span class="eyebrow">MAKE IT A LITTLE MORE DOABLE</span><h2>Turn an idea into a next step</h2><label class="field-label" for="growth-idea">Something I'd like to try</label><input class="text-field" id="growth-idea" type="text" maxlength="120" placeholder="For example, explore a new course"><label class="field-label" for="growth-step">One small first step</label><input class="text-field" id="growth-step" type="text" maxlength="120" placeholder="Something I could do this week"><button class="button button-primary" id="save-growth-plan" type="button">Save my idea</button><div class="inline-feedback" id="growth-plan-feedback" aria-live="polite"></div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">CAREER GOALS · YOUR WAY</span><h2>Keep your next steps in view</h2><form id="career-goal-form" class="stacked-form"><label class="field-label" for="career-goal-input">A career goal</label><input class="text-field" id="career-goal-input" type="text" maxlength="120" placeholder="For example, update my portfolio" required><button class="button button-primary" type="submit">Add career goal</button></form><div class="entry-list" id="career-goal-list"><p class="muted">No goals yet. Add one small step to get started.</p></div><div class="inline-feedback" id="career-goal-feedback" aria-live="polite"></div></article>
+            <article class="panel-card feature-card interview-card"><span class="eyebrow">PRACTICE OUT LOUD, OR JUST READ</span><h2>Interview practice</h2><label class="field-label" for="interview-question">Practice question</label><select class="text-field" id="interview-question"><option value="strength">What strength would you bring to this role?</option><option value="challenge">Tell me about a challenge you worked through.</option><option value="motivation">What interests you about this opportunity?</option></select><div class="practice-prompt" id="interview-prompt" aria-live="polite">What strength would you bring to this role?</div><button class="button button-secondary" id="show-interview-answer" type="button" aria-expanded="false">Show sample answer</button><div class="sample-answer" id="interview-answer" hidden></div><label class="field-label" for="interview-notes">Your practice notes (optional)</label><textarea class="text-field text-area" id="interview-notes" maxlength="300" placeholder="Draft a few ideas. Notes stay in this page session."></textarea><button class="button button-primary" id="save-interview-notes" type="button">Save session notes</button><div class="inline-feedback" id="interview-feedback" aria-live="polite"></div></article>
+            <article class="panel-card info-card tinted-peach"><span class="large-icon icon-white">✧</span><span class="eyebrow">NO DEADLINES HERE</span><h2>There is no one timeline.</h2><p>Your path doesn't have to look like anyone else's. Change your mind, pause, or take the scenic route.</p></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-money" data-view="money" aria-labelledby="money-heading" tabindex="-1" hidden>
+          <div class="page-intro"><span class="eyebrow">HER MONEY · CONFIDENCE OVER PERFECTION</span><h1 id="money-heading">A clearer picture, at your pace.</h1><p>Try a simple monthly planner to see how everyday spending and saving might fit together. Every number here is an example until you enter your own.</p></div>
+          <div class="feature-grid money-grid">
+            <article class="panel-card feature-card budget-card"><div class="section-heading"><div><span class="eyebrow">A PRIVATE DEMO TOOL</span><h2>Your monthly snapshot</h2></div><span class="demo-tag">SAVED ON THIS DEVICE</span></div><label class="field-label" for="monthly-income">Monthly take-home income <span>(optional)</span></label><div class="currency-input"><span aria-hidden="true">$</span><input id="monthly-income" type="number" min="0" step="0.01" inputmode="decimal" placeholder="3,200" aria-describedby="money-note"></div>
+              <div class="budget-lines"><label class="budget-line"><span>Needs <small>Housing, food, essentials</small></span><span class="currency-input"><span>$</span><input id="needs-amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="1,600"></span></label><label class="budget-line"><span>Wants <small>Things you enjoy</small></span><span class="currency-input"><span>$</span><input id="wants-amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="800"></span></label><label class="budget-line"><span>Savings & goals <small>Only what works for you</small></span><span class="currency-input"><span>$</span><input id="savings-amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="400"></span></label></div>
+              <label class="field-label" for="savings-target">Savings goal (optional)</label><div class="currency-input"><span aria-hidden="true">$</span><input id="savings-target" type="number" min="0" step="0.01" inputmode="decimal" placeholder="1,000"></div><label class="field-label" for="savings-current">Already saved toward it</label><div class="currency-input"><span aria-hidden="true">$</span><input id="savings-current" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></div><label class="field-label" for="monthly-spending-limit">Monthly spending limit <span>(optional)</span></label><div class="currency-input"><span aria-hidden="true">$</span><input id="monthly-spending-limit" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Set only if useful"></div><div class="savings-progress" id="savings-progress" aria-live="polite">Add a savings goal to see your progress.</div>
+              <button class="button button-primary" id="calculate-budget" type="button">Update my snapshot</button><div class="budget-result" id="budget-result" aria-live="polite">Enter some example amounts to see your snapshot.</div><p class="demo-disclaimer" id="money-note">Amounts are optional and stored only on this device. This tool is for learning, not financial advice.</p>
+            </article>
+            <article class="panel-card feature-card expenses-card"><span class="eyebrow">YOUR SPENDING, ORGANIZED</span><h2>Track an expense</h2><p class="muted">Add demo expenses and categorize them. Entries are saved in this browser; avoid adding account numbers or other sensitive details.</p><form id="expense-form" class="stacked-form"><label class="field-label" for="expense-description">What was it?</label><input class="text-field" id="expense-description" type="text" maxlength="60" placeholder="For example, groceries" required><div class="form-row"><span><label class="field-label" for="expense-amount">Amount</label><input class="text-field" id="expense-amount" type="number" min="0.01" max="100000000" step="0.01" inputmode="decimal" placeholder="0.00" required></span><span><label class="field-label" for="expense-category">Category</label><select class="text-field" id="expense-category"><option>Needs</option><option>Wants</option><option>Transport</option><option>Personal</option><option>Other</option></select></span></div><label class="field-label" for="expense-date">Date</label><input class="text-field" id="expense-date" type="date" required><button class="button button-primary" type="submit">Add expense</button><div class="inline-feedback" id="expense-feedback" aria-live="polite"></div></form><div class="spending-total">This month's demo total <strong id="expense-total">$0.00</strong></div><div class="entry-list expense-list" id="expense-list"><p class="muted">No expenses yet. Add an entry to see your spending summary.</p></div></article>
+            <article class="panel-card info-card tinted-yellow"><span class="large-icon icon-white">✧</span><span class="eyebrow">MONEY IS PERSONAL</span><h2>Your plan can be flexible.</h2><p>Real budgets have unexpected costs and changing priorities. This simple breakdown is just one way to get curious about your money.</p></article>
+            <article class="panel-card feature-card"><span class="eyebrow">A FEW WORDS TO KNOW</span><h2>Money, without the mystery</h2><details class="glossary"><summary>Emergency fund</summary><p>A savings cushion for unexpected costs. What feels possible depends on your situation.</p></details><details class="glossary"><summary>Interest</summary><p>The cost of borrowing money or the amount earned on savings, depending on the account.</p></details><details class="glossary"><summary>Monthly expenses</summary><p>Costs that happen in a month, including needs, commitments, and things you enjoy.</p></details><details class="glossary"><summary>Financial goal</summary><p>Something you'd like your money to help with, now or in the future.</p></details></article>
+            <article class="panel-card info-card tinted-lavender"><span class="large-icon icon-white">♡</span><span class="eyebrow">NO SHAME, JUST INFORMATION</span><h2>Every money story is different.</h2><p>You deserve clear, respectful information and the freedom to make choices that work for you.</p></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-confidence" data-view="confidence" aria-labelledby="confidence-heading" tabindex="-1" hidden>
+          <div class="page-intro"><span class="eyebrow">HER CONFIDENCE · A SPACE TO BE YOURSELF</span><h1 id="confidence-heading">You don't need permission to shine.</h1><p>Confidence isn't always loud. Sometimes it looks like showing up, changing your mind, or giving yourself credit for getting through today.</p></div>
+          <div class="feature-grid">
+            <article class="panel-card affirmation-card"><span class="eyebrow">WORDS FOR YOUR POCKET</span><span class="big-quote" aria-hidden="true">“</span><p class="affirmation-text" id="affirmation-text">I am allowed to learn as I go.</p><div class="affirmation-actions"><button class="button button-secondary" id="new-affirmation" type="button">Another reminder ↻</button><button class="button button-primary" id="save-affirmation" type="button" aria-pressed="false">♡ Save this one</button></div><div class="inline-feedback" id="affirmation-feedback" aria-live="polite"></div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">TODAY'S TINY CONFIDENCE CHALLENGE</span><h2 id="challenge-title">Your challenge for today</h2><p class="challenge-prompt" id="daily-challenge"></p><button class="button button-primary" id="complete-challenge" type="button">I gave it a try</button><div class="inline-feedback" id="challenge-feedback" aria-live="polite">Optional—trying counts, whatever that looks like.</div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">A NOTE TO YOURSELF</span><h2>Save something you want to remember</h2><p class="muted">A strength, a kind word, a small win—whatever feels like yours.</p><label class="field-label" for="confidence-note">My note</label><textarea class="text-field text-area" id="confidence-note" maxlength="240" placeholder="Today, I want to remember…"></textarea><button class="button button-primary" id="save-confidence-note" type="button">Keep this note</button><div class="inline-feedback" id="confidence-note-feedback" aria-live="polite"></div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">PERSONAL WINS</span><h2>Give your effort a name</h2><form id="win-form" class="stacked-form"><label class="field-label" for="win-input">Something I did that I'm proud of</label><input class="text-field" id="win-input" type="text" maxlength="160" placeholder="Big or small, it counts" required><button class="button button-primary" type="submit">Save this win</button></form><div class="entry-list" id="win-list"><p class="muted">Your wins will appear here when you add them.</p></div><div class="inline-feedback" id="win-feedback" aria-live="polite"></div></article>
+            <article class="panel-card feature-card boundary-card"><span class="eyebrow">BOUNDARY-SETTING PRACTICE</span><h2>Try words that feel like yours</h2><label class="field-label" for="boundary-scenario">Choose a practice scenario</label><select class="text-field" id="boundary-scenario"><option value="time">Someone asks for your time when you're already busy.</option><option value="privacy">Someone asks a personal question you'd rather not answer.</option><option value="work">A colleague keeps adding tasks outside your agreed priorities.</option></select><div class="boundary-response" id="boundary-response" aria-live="polite">“I can't take that on right now, but thank you for asking.”</div><button class="button button-secondary" id="boundary-alternate" type="button">Try another sample phrase</button><label class="field-label" for="boundary-practice">Write your own version (optional)</label><textarea class="text-field text-area" id="boundary-practice" maxlength="240" placeholder="What would feel natural for you?"></textarea><button class="button button-primary" id="save-boundary-practice" type="button">Keep practice for this session</button><div class="inline-feedback" id="boundary-feedback" aria-live="polite">Practice text is kept only until you close or refresh this page.</div></article>
+            <article class="panel-card info-card tinted-peach"><span class="large-icon icon-white">✧</span><span class="eyebrow">A SMALL WIN IS STILL A WIN</span><h2>What did you do today that took courage?</h2><p>It doesn't have to be impressive to anyone else. If it mattered to you, it counts.</p><button class="button button-secondary" type="button" data-open-section="wellness">Take a moment to check in ↗</button></article>
+          </div>
+          <section class="panel-card saved-notes"><div class="section-heading"><div><span class="eyebrow">JUST FOR YOU</span><h2>Your saved reminders</h2></div></div><div id="saved-notes-list"><p class="muted">Any reminders you save will appear here on this device.</p></div></section>
+        </section>
+
+        <section class="view" id="view-lifestyle" data-view="lifestyle" aria-labelledby="lifestyle-heading" tabindex="-1" hidden>
+          <div class="page-intro"><span class="eyebrow">HER LIFESTYLE · MAKE SPACE FOR YOU</span><h1 id="lifestyle-heading">A life with room to breathe.</h1><p>Joy doesn't have to be earned or expensive. Find small ways to make a little more room for rest, connection, and things that feel like you.</p></div>
+          <div class="feature-grid">
+            <article class="panel-card feature-card"><span class="eyebrow">YOUR LITTLE JOY LIST</span><h2>Choose something that sounds lovely</h2><p class="muted">These are ideas, not assignments. Add a tick to the things that make you smile.</p><div class="check-list"><label class="check-row"><input type="checkbox" data-progress="lifestyle"><span><strong>Listen to a song you love</strong><small>A little soundtrack for this moment.</small></span></label><label class="check-row"><input type="checkbox" data-progress="lifestyle"><span><strong>Take a slow walk somewhere nearby</strong><small>Even a few minutes of fresh air can feel good.</small></span></label><label class="check-row"><input type="checkbox" data-progress="lifestyle"><span><strong>Make something just for fun</strong><small>Draw, cook, doodle, or try something new.</small></span></label><label class="check-row"><input type="checkbox" data-progress="lifestyle"><span><strong>Make time for someone who gets you</strong><small>A call, a message, or sharing a quiet moment.</small></span></label></div><div class="inline-feedback" id="lifestyle-feedback" aria-live="polite">Your list is yours to change.</div></article>
+            <article class="panel-card info-card tinted-blue"><span class="large-icon icon-white">☁</span><span class="eyebrow">REST IS PART OF THE PLAN</span><h2>You don't have to fill every moment.</h2><p>A quiet afternoon, an early night, or saying “not today” can all be good choices.</p></article>
+            <article class="panel-card feature-card"><span class="eyebrow">MAKE A LITTLE SPACE</span><h2>One thing I'd love more of</h2><div class="choice-chips" role="group" aria-label="Choose something you'd like more of"><button type="button" data-lifestyle="Rest">More rest</button><button type="button" data-lifestyle="Creative time">Creative time</button><button type="button" data-lifestyle="Time outdoors">Time outdoors</button><button type="button" data-lifestyle="Connection">Connection</button><button type="button" data-lifestyle="Quiet">A little quiet</button></div><label class="field-label" for="lifestyle-intention">My small intention (optional)</label><input class="text-field" id="lifestyle-intention" maxlength="120" placeholder="Something that feels doable"><button class="button button-primary" id="save-lifestyle" type="button">Save my intention</button><div class="inline-feedback" id="lifestyle-feedback-save" aria-live="polite"></div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">A SIMPLE WARDROBE NOTEBOOK</span><h2>Pieces you reach for</h2><p class="muted">A lightweight list for outfit planning. Keep descriptions general—no photos or personal data are uploaded.</p><form id="wardrobe-form" class="stacked-form"><label class="field-label" for="wardrobe-item">Item</label><input class="text-field" id="wardrobe-item" type="text" maxlength="60" placeholder="For example, blue cardigan" required><div class="form-row"><span><label class="field-label" for="wardrobe-category">Type</label><select class="text-field" id="wardrobe-category"><option>Top</option><option>Bottom</option><option>Dress</option><option>Layer</option><option>Shoes</option><option>Accessory</option></select></span><span><label class="field-label" for="wardrobe-color">Color (optional)</label><input class="text-field" id="wardrobe-color" type="text" maxlength="24" placeholder="Color"></span></div><button class="button button-primary" type="submit">Add to wardrobe</button><div class="inline-feedback" id="wardrobe-feedback" aria-live="polite"></div></form><div class="entry-list" id="wardrobe-list"><p class="muted">Your wardrobe list is empty. Add a few pieces to start an outfit.</p></div></article>
+            <article class="panel-card feature-card"><span class="eyebrow">SAVE AN OUTFIT COMBINATION</span><h2>Put a look together</h2><p class="muted">Choose pieces from your wardrobe list and save a named combination.</p><form id="outfit-form" class="stacked-form"><label class="field-label" for="outfit-name">Outfit name</label><input class="text-field" id="outfit-name" type="text" maxlength="60" placeholder="For example, comfy weekend" required><label class="field-label" for="outfit-pieces">Pieces to include</label><select class="text-field" id="outfit-pieces" multiple size="4" aria-describedby="outfit-help"></select><small id="outfit-help" class="muted">Use Ctrl (Windows) or Command (Mac) to choose more than one.</small><button class="button button-primary" type="submit">Save outfit</button><div class="inline-feedback" id="outfit-feedback" aria-live="polite"></div></form><div class="entry-list" id="outfit-list"><p class="muted">No outfits saved yet. Add wardrobe pieces, then create a combination.</p></div></article>
+            <article class="panel-card info-card tinted-lavender"><span class="large-icon icon-white">☼</span><span class="eyebrow">YOUR PACE COUNTS</span><h2>Ordinary days matter, too.</h2><p>You don't need a big plan to make life feel a little more like your own.</p></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-settings" data-view="settings" aria-labelledby="settings-heading" tabindex="-1" hidden>
+          <div class="page-intro"><span class="eyebrow">YOUR SPACE · MAKE IT YOURS</span><h1 id="settings-heading">Display & shortcuts</h1><p>Choose how HERSPACE looks and which destinations appear on your dashboard. These preferences are stored locally in this browser.</p></div>
+          <div class="feature-grid settings-grid">
+            <article class="panel-card feature-card">
+              <span class="eyebrow">DISPLAY PREFERENCES</span><h2>Set a comfortable view</h2>
+              <label class="field-label" for="display-theme">Color theme</label><select class="text-field" id="display-theme"><option value="system">Use device setting</option><option value="light">Light</option><option value="dark">Dark</option></select>
+              <label class="field-label" for="display-scale">Text size</label><select class="text-field" id="display-scale"><option value="standard">Standard</option><option value="large">Larger text</option></select>
+              <label class="setting-toggle"><input id="compact-layout" type="checkbox"><span><strong>Compact cards</strong><small>Use less space between cards.</small></span></label>
+              <label class="setting-toggle"><input id="reduce-motion" type="checkbox"><span><strong>Reduce motion</strong><small>Limit decorative movement and transitions.</small></span></label>
+              <div class="inline-feedback" id="display-feedback" aria-live="polite">Display choices are saved in this browser.</div>
+            </article>
+            <article class="panel-card feature-card">
+              <span class="eyebrow">DASHBOARD SHORTCUTS</span><h2>Choose your quick actions</h2><p class="muted">Select the sections you want to see on Overview. You can change this any time.</p>
+              <div class="shortcut-options" id="shortcut-options" role="group" aria-label="Dashboard shortcut sections"></div>
+              <div class="inline-feedback" id="shortcut-feedback" aria-live="polite">Choose up to six shortcuts for your dashboard.</div>
+            </article>
+            <article class="panel-card info-card tinted-lavender"><span class="large-icon icon-white" aria-hidden="true">⌕</span><span class="eyebrow">SEARCH YOUR SPACE</span><h2>Find a feature in any section.</h2><p>Use the search field in the header to find a matching section or tool. Search stays in this browser and does not send your text anywhere.</p><button class="button button-secondary" id="settings-search" type="button">Go to search ↗</button></article>
+          </div>
+          <p class="demo-disclaimer">Theme, text-size, compact-layout, and shortcut choices are local display preferences—not account settings or synced data.</p>
+        </section>
+
+        <footer class="page-footer"><span>HERSPACE <span aria-hidden="true">✦</span> YOUR LIFE, YOUR SPACE</span><span>Demo experience · Your choices stay in this browser</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="app-notification" id="app-notification" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+</body>
+</html>
